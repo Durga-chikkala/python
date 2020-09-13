@@ -1,0 +1,21 @@
+import random
+print("GUESS BUZZ")
+score=0
+A=int(input('PRESS 5 TO CONTINUE '))
+if(A==5): 
+ guessno=random.randint(0,9)
+ Guesscount=0
+ Guesslimit=9
+ while(Guesscount<Guesslimit):
+  Guess=int(input('Guess: '))
+  Guesscount+=1
+  if(Guess==guessno):
+    print("you won!")
+    score+=1
+    break
+ else:
+    print("sorry try again")
+
+else:
+  print("input correct option!")   
+
