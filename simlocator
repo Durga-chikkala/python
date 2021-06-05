@@ -1,0 +1,41 @@
+import phonenumbers
+import time
+print("                  ♥♥♥♥♥♥♥♥♥       welcome to sim locator   ♥♥♥♥♥♥♥♥♥       ")
+print()
+print()
+time.sleep(5)
+
+from phonenumbers import geocoder
+
+print()
+print()
+print()
+while True:
+  number=input("___________Enter phone number:___________ ")
+  if(len(number)==13):
+    chnum=phonenumbers.parse(number,"CH")
+    print()
+    if(geocoder.description_for_number(chnum,"en")):
+        print("   The Mobile number is present in ",geocoder.description_for_number(chnum,"en"))
+        break
+    else:
+      print()
+      print("                      enter correct number            ")
+  else:
+    print()
+    print("                      improper size please reenter ..||            ")
+    print()
+from phonenumbers import carrier
+chnum=phonenumbers.parse(number,"RO")
+time.sleep(4)
+print()
+print()
+print()
+print("                      ♦     ♦   ")
+print("                     ♦   ♦   ♦  ")
+print("                      ♦     ♦   ")
+print("                        ♦ ♦     ")
+print()
+print()
+
+print("  The operator of the sim is ",carrier.name_for_number(chnum,"en"))
