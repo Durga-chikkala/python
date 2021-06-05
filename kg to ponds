@@ -1,0 +1,3 @@
+kilogram=input("enter weight in kilograms")
+pounds=2.2*int(kilogram)
+print("weight in pounds",pounds)
