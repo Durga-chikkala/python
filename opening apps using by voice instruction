@@ -1,0 +1,25 @@
+import pyttsx3
+import time
+import os
+print(os.getcwd())
+def speak(audio):
+    engine=pyttsx3.init()
+    voice=engine.getProperty("voices")
+    engine.setProperty("voice",voice[1].id)
+    engine.setProperty("rate",110)
+    engine.say(audio)
+    engine.runAndWait()
+speak("Hey what's up enter 1 to open notepad ...or enter 2 to open chrome ..or enter 3 to open microsoft edge ...or enter 4 to open excel...enter 5 to open powerpoint ")
+p=int(input())
+if p==1:
+    os.system("start notepad")
+elif(p==2):
+    os.system("start chrome")
+elif(p==3):
+    os.system("start msedge")
+elif(p==4):
+    os.system("start excel")
+elif(p==5):
+    os.system("start powerpnt")
+else:
+    speak("Enter correct input !!!mava bro")
