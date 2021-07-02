@@ -1,0 +1,38 @@
+import random
+import pyttsx3
+import time
+from pynotifier import Notification
+items=["head","tail"]
+teamA="Rcb"
+teamB="Csk"
+def speak(audio):
+    engine=pyttsx3.init()
+    engine.setProperty("rate",150)
+    voice=engine.getProperty("voices")
+    engine.setProperty("voice",voice[1].id)
+    engine.setProperty("rate",140)
+    engine.say(audio)
+    engine.runAndWait()
+
+def notifiy(data,head):
+    Notification(title=head,
+                 description=data,
+                 duration=20).send()
+speak("Captain kohli will tell the toss!!!")
+speak("hello !!!Everyone !!its time for toss both the captains are here !!!coin is flipped and it is")
+choice=input("enter here....:")
+time.sleep(2)
+result=random.choice(items)
+speak(result)
+if(choice==result or choice[0]==result[0]):
+    speak("you won the toss and what's your choice...")
+    answer=input("Bat/bowl:")
+    won=teamA
+    speak("Kohli choose to {}".format(answer))
+else:
+    speak("opponent won the choice......")
+    speak("what's your choice Dhoni!!!")
+    answer = input("Bat/bowl:")
+    won=teamB
+    speak("Dhoni choose to {}".format(answer))
+notifiy("{} won the toss and elected to {} first".format(won,answer),teamA +" vs "+ teamB)
