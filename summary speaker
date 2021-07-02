@@ -1,0 +1,52 @@
+import pyttsx3
+import pywhatkit
+import webbrowser
+import wikipedia
+from pynotifier import Notification
+import pyautogui
+import tkinter as tk
+from functools import partial
+def speak(a):
+    engine=pyttsx3.init()
+    engine.say(a)
+    engine.runAndWait()
+def notify(head,matter):
+    Notification(title=head,
+                 description=matter,
+                 duration=20).send()
+def open(address):
+    webbrowser.open("www."+address)
+def shutdownsystem(time):
+    pywhatkit.shutdown(time)
+
+def takescreenshot(sname):
+    image = pyautogui.screenshot()
+    image.save(sname+".PNG")
+    n=int(input("enter 1 to show the image"))
+    if(n==1):
+        image.show()
+
+
+def whatsapp(hour,minute):
+    number=input("Enter number with country code:")
+    msg=input("Enter text")
+    hour=int(input("enter hour"))
+    min=int(input("Enter minute"))
+    pywhatkit.sendwhatmsg(number,msg,hour,min)
+
+root=tk.Tk()
+root.title("Durga Chikkala")
+root.config(bg="#79CDCD")
+root.geometry('1000x1000')
+wikiname=tk.Label(root,text="Enter name :",fg="red",font=("Aerial",12),bg="#79CDCD").place(x=270,y=300)
+mname=tk.StringVar()
+head=tk.Label(root,text="AudioBook",font=("Aerial",22),bg="#79CDCD",fg="red",).place(x=400,y=100)
+def summary():
+    name=mname.get()
+    try:
+        speak(wikipedia.summary(name))
+    except:
+        speak("unable to fetch data")
+wikipedianame = tk.Entry(root,textvariable=mname,font=("aerial",12),bg="#79CDCD").place(x=400, y=300)
+wikibtn=tk.Button(root,text="speak",command=summary,bg="red",font=("Aerial",12)).place(x=450,y=370)
+root.mainloop()
