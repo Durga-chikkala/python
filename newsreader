@@ -1,0 +1,35 @@
+import pyttsx3
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import tkinter as tk
+def speak(a):
+    engine=pyttsx3.init()
+    voice=engine.getProperty("voices")
+    engine.setProperty("voice",voice[1].id)
+    engine.setProperty("rate",130)
+    engine.say(a)
+    engine.runAndWait()
+def f():
+    print("hii")
+    speak("hello welcome")
+    data=requests.get("https://timesofindia.indiatimes.com/india/omicron-variant-live-updates-covid-in-india/liveblog/88864000.cms")
+    content=data.text
+    soup=BeautifulSoup(content,"html.parser")
+    time=soup.find_all("div",{'class':"xOe7d"})
+    times=[]
+    for i in time[:-1]:
+        times.append(i.text)
+    headline=soup.find_all("div",{"class":"_2VPRN"})
+    headlines=[]
+    print(len(times))
+    for i in headline[:-1:]:
+        headlines.append(i.text)
+    print(len(headlines))
+    df=pd.DataFrame({"Date":times,"headlines":headlines})
+    df.to_csv("news.txt",index=None)
+    df1=pd.read_csv("news.txt")
+    with open("news.txt","r") as f:
+        for i in f.readlines():
+            speak(i)
+f()
